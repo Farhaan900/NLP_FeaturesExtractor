@@ -1,4 +1,4 @@
 .idea
 __pycache__
 books_*
-./testor.py
+testor
