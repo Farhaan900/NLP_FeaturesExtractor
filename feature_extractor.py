@@ -57,7 +57,11 @@ def book_structure(blob, path_to_file):
     for sentence in sentences:
         avg_sentence_len.append(len(sentence.words))
 
-    avg_sentence_len = sum(avg_sentence_len) / len(avg_sentence_len)
+    s_len = len(avg_sentence_len)
+    if (s_len > 0):
+        avg_sentence_len = sum(avg_sentence_len) / s_len
+    else:
+        avg_sentence_len = 0
 
     return sentences_count, avg_sentence_len #, word_count , nouns_count
 
@@ -95,6 +99,7 @@ if __name__ == "__main__":
 
     write_to_csv(CSV_HEADERS, "w")
 
+    # books_list = ["pg34164-content.html"]
     idx = 1
     for book in books_list:
         features = []
