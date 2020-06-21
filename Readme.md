@@ -6,7 +6,8 @@
 * sentiment analysis from the beginning of a book
 * sentiment analysis from the ending of a book 
 * sentences count
-* word count
+* average sentence length
+* ~~word count~~
 * flesch reading score
 
 ### Packages required :
@@ -42,6 +43,7 @@
 * Senti_E2  - Sentiment of the 2nd 1/3 of the book's ending
 * Senti_E3  - Sentiment of the 3rd 1/3 of the book's ending
 * S_count   - Sentences count
-* W_count   - Word count
+* Avg_S_len - Average Sentence length
+* ~~W_count   - Word count~~
 * Flesch    - Flesch reading score
 

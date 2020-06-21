@@ -18,7 +18,8 @@ import html_parser
 BOOKS_PATH = "books"
 CHAPTER_SIZE = 3000
 OUTPUT_FILE_NAME = "features.csv"
-CSV_HEADERS = ["BOOK_ID", "Senti_S1", "Senti_S2", "Senti_S3", "Senti_E1", "Senti_E2", "Senti_E3", "S_count", "W_count", "Flesch"]
+CSV_HEADERS = ["BOOK_ID", "Senti_S1", "Senti_S2", "Senti_S3", "Senti_E1", "Senti_E2", "Senti_E3", "S_count", "Avg_S_len", "Flesch"] #, "W_count"
+SENTIMENT_WEIGHT = 100
 
 
 def start_end_sentiment(blob):
@@ -37,16 +38,28 @@ def start_end_sentiment(blob):
         chapter_part = TextBlob(seperator.join(blob.words[-i - chapter_part_size:-i]))
         sentiment_end.append(chapter_part.sentiment.polarity)
 
+    if SENTIMENT_WEIGHT != 0:
+        sentiment_start = [(x+1)*100 for x in sentiment_start]
+        sentiment_end = [(x + 1) * 100 for x in sentiment_end]
+
     return sentiment_start, sentiment_end
 
 
 def book_structure(blob, path_to_file):
-    sentences_count = len(blob.sentences)
+
+    sentences = blob.sentences
+    sentences_count = len(sentences)
     word_count = len(blob.words)
     # nouns_count = len(blob.noun_phrases)
     # paragraph_count = html_parser.get_paragraph_count(path_to_file)
 
-    return sentences_count, word_count #, nouns_count
+    avg_sentence_len = []
+    for sentence in sentences:
+        avg_sentence_len.append(len(sentence.words))
+
+    avg_sentence_len = sum(avg_sentence_len) / len(avg_sentence_len)
+
+    return sentences_count, avg_sentence_len #, word_count , nouns_count
 
 
 def write_to_csv(data, mode):
@@ -60,10 +73,10 @@ def extractor(path_to_file):
     blob = TextBlob(book_data)
 
     sentiment_start, sentiment_end = start_end_sentiment(blob)
-    sentences_count, word_count = book_structure(blob, path_to_file)
+    sentences_count, avg_sentence_len = book_structure(blob, path_to_file)
     flesch_score = textstat.flesch_reading_ease(book_data)
 
-    return sentiment_start, sentiment_end, sentences_count, word_count, flesch_score
+    return sentiment_start, sentiment_end, sentences_count, avg_sentence_len, flesch_score # ,word_count
 
 
 if __name__ == "__main__":

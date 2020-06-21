@@ -1,2 +1,5 @@
 .idea
 __pycache__
+books_*
+testor*
+features_*
