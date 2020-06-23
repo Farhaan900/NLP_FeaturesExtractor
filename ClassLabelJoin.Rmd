@@ -1,0 +1,26 @@
+```{r}
+library(stringr)
+library(dplyr)
+```
+
+```{r}
+master996 = read.csv("master996.csv", sep=";")
+genre = master996[c(2,3)]
+```
+
+```{r}
+#genre[,1] <- gsub(".epub", "", genre[,1])
+```
+
+```{r}
+genre[,1] <- str_extract(genre[,1], "pg[0-9]+")
+```
+
+
+```{r}
+features <- read.csv("features.csv")
+```
+
+```{r}
+x <- features %>% left_join(genre, by = c('BOOK_ID' = 'book_id'))
+```
