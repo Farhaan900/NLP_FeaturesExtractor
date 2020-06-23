@@ -6,6 +6,7 @@ library(dplyr)
 ```{r}
 master996 = read.csv("master996.csv", sep=";")
 genre = master996[c(2,3)]
+genre_name = master996[c(1,2,3)]
 ```
 
 ```{r}
@@ -14,6 +15,7 @@ genre = master996[c(2,3)]
 
 ```{r}
 genre[,1] <- str_extract(genre[,1], "pg[0-9]+")
+genre_name[,2] <- str_extract(genre_name[,2], "pg[0-9]+")
 ```
 
 
@@ -23,4 +25,13 @@ features <- read.csv("features.csv")
 
 ```{r}
 x <- features %>% left_join(genre, by = c('BOOK_ID' = 'book_id'))
+y <- features %>% left_join(genre_name, by = c('BOOK_ID' = 'book_id'))
+```
+
+```{r}
+write.csv(x,"feature_lables.csv", row.names = FALSE)
+```
+
+```{r}
+write.csv(y,"feature_lables_Bknames.csv", row.names = FALSE)
 ```

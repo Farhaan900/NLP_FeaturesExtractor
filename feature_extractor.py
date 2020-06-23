@@ -16,7 +16,7 @@ import numpy as np
 import html_parser
 
 # Global parameters
-BOOKS_PATH = "books_s"
+BOOKS_PATH = "books"
 CHAPTER_SIZE = 3000
 OUTPUT_FILE_NAME = "features.csv"
 CSV_HEADERS = ["BOOK_ID", "Senti_S1", "Senti_S2", "Senti_S3", "Senti_E1", "Senti_E2", "Senti_E3", "S_count", "Avg_S_len", "Flesch" , "W_count", "Noun_Cnt"]

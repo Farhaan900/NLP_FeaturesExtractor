@@ -19,6 +19,7 @@
 * csv
 * os
 * pandas
+* sklearn
 
 ## USAGE
 
