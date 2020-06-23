@@ -7,8 +7,9 @@
 * sentiment analysis from the ending of a book 
 * sentences count
 * average sentence length
-* ~~word count~~
 * flesch reading score
+* word count
+* Proper noun count
 
 ### Packages required :
 * textblob
@@ -44,6 +45,6 @@
 * Senti_E3  - Sentiment of the 3rd 1/3 of the book's ending
 * S_count   - Sentences count
 * Avg_S_len - Average Sentence length
-* ~~W_count   - Word count~~
 * Flesch    - Flesch reading score
-
+* W_count   - Word count
+* Noun_Cnt  - Proper noun count
